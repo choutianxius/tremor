@@ -1,5 +1,5 @@
 {
-  "name": "@tremor/react",
+  "name": "@choutianxius/tremor",
   "version": "0.0.0-development",
   "description": "The React library to build dashboards faster.",
   "scripts": {
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tremorlabs/tremor.git"
+    "url": "https://github.com/choutianxius/tremor.git"
   },
-  "author": "tremor",
+  "author": "tremor,choutianxius",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/tremorlabs/tremor/issues"
+    "url": "https://github.com/choutianxius/tremor/issues"
   },
-  "homepage": "https://github.com/tremorlabs/tremor#readme",
+  "homepage": "https://github.com/choutianxius/tremor#readme",
   "dependencies": {
     "@floating-ui/react": "^0.19.2",
     "@headlessui/react": "^1.7.18",
