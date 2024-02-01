@@ -32,7 +32,13 @@ const getMarkerBgColor = (
   return "";
 };
 
-const BarLabels = ({ values }: { values: number[] }) => {
+const BarLabels = ({
+  values,
+  labels,
+}: {
+  values: number[];
+  labels?: (null | number | string)[];
+}) => {
   const sumValues = sumNumericArray(values);
   let prefixSum = 0;
   let sumConsecutveHiddenLabels = 0;
@@ -55,6 +61,9 @@ const BarLabels = ({ values }: { values: number[] }) => {
           sumValues - prefixSum >= 0.15 * sumValues &&
           prefixSum >= 0.1 * sumValues;
         sumConsecutveHiddenLabels = showLabel ? 0 : (sumConsecutveHiddenLabels += widthPercentage);
+        const displayedLabel = labels
+          ? labels[idx] || prefixSum
+          : prefixSum;
 
         return (
           <div
@@ -65,14 +74,24 @@ const BarLabels = ({ values }: { values: number[] }) => {
             <span
               className={tremorTwMerge(showLabel ? "block" : "hidden", "left-1/2 translate-x-1/2")}
             >
-              {prefixSum}
+              {displayedLabel}
             </span>
           </div>
         );
       })}
-      <div className={tremorTwMerge("absolute bottom-0 flex items-center left-0")}>0</div>
+      <div className={tremorTwMerge("absolute bottom-0 flex items-center left-0")}>
+        {
+          labels
+            ? labels[0] || 0
+            : 0
+        }
+      </div>
       <div className={tremorTwMerge("absolute bottom-0 flex items-center right-0")}>
-        {sumValues}
+        {
+          labels
+            ? labels[labels.length - 1] || sumValues
+            : sumValues
+        }
       </div>
     </div>
   );
@@ -82,7 +101,9 @@ export interface CategoryBarProps extends React.HTMLAttributes<HTMLDivElement> {
   values: number[];
   colors?: Color[];
   markerValue?: number;
+  markerText?: string | number;
   showLabels?: boolean;
+  labels?: (null | string | number)[];
   tooltip?: string;
   showAnimation?: boolean;
 }
@@ -92,7 +113,9 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((props, r
     values = [],
     colors = themeColorRange,
     markerValue,
+    markerText,
     showLabels = true,
+    labels,
     tooltip,
     showAnimation = false,
     className,
