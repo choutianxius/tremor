@@ -61,7 +61,7 @@ const BarLabels = ({
           sumValues - prefixSum >= 0.15 * sumValues &&
           prefixSum >= 0.1 * sumValues;
         sumConsecutveHiddenLabels = showLabel ? 0 : (sumConsecutveHiddenLabels += widthPercentage);
-        const displayedLabel = labels ? labels[idx] || prefixSum : prefixSum;
+        const displayedLabel = labels ? labels[idx + 1] || prefixSum : prefixSum;
 
         return (
           <div
