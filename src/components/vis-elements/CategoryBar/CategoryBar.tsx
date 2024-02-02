@@ -61,9 +61,7 @@ const BarLabels = ({
           sumValues - prefixSum >= 0.15 * sumValues &&
           prefixSum >= 0.1 * sumValues;
         sumConsecutveHiddenLabels = showLabel ? 0 : (sumConsecutveHiddenLabels += widthPercentage);
-        const displayedLabel = labels
-          ? labels[idx] || prefixSum
-          : prefixSum;
+        const displayedLabel = labels ? labels[idx] || prefixSum : prefixSum;
 
         return (
           <div
@@ -80,18 +78,10 @@ const BarLabels = ({
         );
       })}
       <div className={tremorTwMerge("absolute bottom-0 flex items-center left-0")}>
-        {
-          labels
-            ? labels[0] || 0
-            : 0
-        }
+        {labels ? labels[0] || 0 : 0}
       </div>
       <div className={tremorTwMerge("absolute bottom-0 flex items-center right-0")}>
-        {
-          labels
-            ? labels[labels.length - 1] || sumValues
-            : sumValues
-        }
+        {labels ? labels[labels.length - 1] || sumValues : sumValues}
       </div>
     </div>
   );
@@ -113,7 +103,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((props, r
     values = [],
     colors = themeColorRange,
     markerValue,
-    markerText,
+    // markerText,
     showLabels = true,
     labels,
     tooltip,
@@ -134,7 +124,7 @@ const CategoryBar = React.forwardRef<HTMLDivElement, CategoryBarProps>((props, r
         className={tremorTwMerge(makeCategoryBarClassName("root"), className)}
         {...other}
       >
-        {showLabels ? <BarLabels values={values} /> : null}
+        {showLabels ? <BarLabels values={values} labels={labels} /> : null}
         <div
           className={tremorTwMerge(
             makeCategoryBarClassName("barWrapper"),
